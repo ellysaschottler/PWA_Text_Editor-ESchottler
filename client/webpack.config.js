@@ -18,12 +18,52 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      
+      new HtmlWebpackPlugin({
+        template: './index.html',
+        title: 'Text Editor'
+      }),
+
+      new InjectManifest({
+        swSrc: './src-sw.js',
+        swDest: 'service-worker.js',
+      }),
+      new WebpackPwaManifest({
+        // TODO: Create a manifest.json:
+        name: "PWA text editor",
+        short_name: "Text Editor",
+        description: "A text editor run in the browser",
+        background_color: "#ffffff",
+        theme_color: "#ffffff",
+        start_url: "./",
+        publicPath: "./",
+        icons: [
+          {
+            src: "./images/logo.png",
+            size: [96, 128, 192, 256],
+            destination: path.join("/assets/icons")
+          }
+        ]
+      }),
+     
     ],
 
     module: {
       rules: [
-        
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+            },
+          },
+        },
       ],
     },
   };
