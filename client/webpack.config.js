@@ -29,17 +29,17 @@ module.exports = () => {
       }),
       new WebpackPwaManifest({
         // TODO: Create a manifest.json:
-        name: "PWA text editor",
-        short_name: "Text Editor",
-        description: "A text editor run in the browser",
-        background_color: "#ffffff",
-        theme_color: "#ffffff",
+        name: "Just Another Text Editor",
+        short_name: "J.A.T.E.",
+        description: "Takes notes with JavaScirpt syntax highlighting",
+        background_color: "#225ca3",
+        theme_color: "#225ca3",
         start_url: "./",
         publicPath: "./",
         icons: [
           {
             src: "./images/logo.png",
-            size: [96, 128, 192, 256],
+            size: [96, 128, 192, 256, 512],
             destination: path.join("/assets/icons")
           }
         ]
